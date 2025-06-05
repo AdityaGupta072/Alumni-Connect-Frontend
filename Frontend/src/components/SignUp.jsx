@@ -21,7 +21,7 @@ const SignUp = () => {
     setError("");
   
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/register", {
+      const response = await axios.post("https://alumni-connect-backend-1z42.onrender.com/api/auth/register", {
         name,
         email,
         password,
@@ -67,7 +67,7 @@ const SignUp = () => {
   return (
     <>
       <section className="flex justify-center w-full mt-5">
-        <div className="max-w-2xl w-full p-6 bg-white shadow-lg rounded-lg">
+        <div className="max-w-2xl w-full p-6 bg-white  rounded-lg">
           {/* Headings */}
           <div className="text-center">
             <p className="text-gray-700 text-xl">WELCOME TO</p>
