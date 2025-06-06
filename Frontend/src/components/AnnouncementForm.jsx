@@ -42,8 +42,10 @@ const AnnouncementForm = () => {
         username: user.name,
         tags: formData.tags.split(',').map(tag => tag.trim())
       };
-
-      const response = await axios.post("https://alumni-connect-backend-1z42.onrender.com/api/announcements/create", payload, {
+const BASE_URL = import.meta.env.MODE === 'production'
+  ? import.meta.env.VITE_DEV_API_URL
+  : import.meta.env.VITE_PROD_API_URL;
+      const response = await axios.post(`${BASE_URL}/api/announcements/create`, payload, {
         headers: {
           Authorization: `Bearer ${token}`
         }

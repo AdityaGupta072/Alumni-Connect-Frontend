@@ -15,13 +15,16 @@ const SignUp = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-  
+    
     try {
-      const response = await axios.post("https://alumni-connect-backend-1z42.onrender.com/api/auth/register", {
+const BASE_URL = import.meta.env.MODE === 'production'
+  ? import.meta.env.VITE_DEV_API_URL
+  : import.meta.env.VITE_PROD_API_URL;
+      const response = await axios.post(`${BASE_URL}/api/auth/register`, {
         name,
         email,
         password,

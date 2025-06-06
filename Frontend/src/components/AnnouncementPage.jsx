@@ -4,6 +4,9 @@ import Navbar from '../components/NavbarAnnouncement';
 import axios from 'axios';
 
 const AnnouncementPage = () => {
+const BASE_URL = import.meta.env.MODE === 'production'
+  ? import.meta.env.VITE_DEV_API_URL
+  : import.meta.env.VITE_PROD_API_URL;
   const [announcements, setAnnouncements] = useState([]);
   const [filteredAnnouncements, setFilteredAnnouncements] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,7 +19,7 @@ const AnnouncementPage = () => {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
   useEffect(() => {
-    fetch('https://alumni-connect-backend-1z42.onrender.com/api/announcements')
+    fetch( `${BASE_URL}/api/announcements`)
       .then(res => res.json())
       .then(data => {
         setAnnouncements(data);
@@ -25,6 +28,10 @@ const AnnouncementPage = () => {
   }, []);
 
 const handleDeleteAnnouncement = async (id) => {
+const BASE_URL = import.meta.env.MODE === 'production'
+  ? import.meta.env.VITE_DEV_API_URL
+  : import.meta.env.VITE_PROD_API_URL;
+
   console.log('handleDeleteAnnouncement called with id:', id);
   const token = localStorage.getItem('token');
   console.log('Token:', token);
@@ -35,7 +42,7 @@ const handleDeleteAnnouncement = async (id) => {
       return;
     }
 
-    await axios.delete(`https://alumni-connect-backend-1z42.onrender.com/api/announcements/${id}`, {
+    await axios.delete(`${BASE_URL}/api/announcements/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,  // Correct auth header format
       },
@@ -93,7 +100,7 @@ const handleDeleteAnnouncement = async (id) => {
 
       {/* Filter Dropdown */}
       {showFilterDropdown && (
-        <div className="mx-10 mt-4 p-4 bg-white rounded-xl shadow-lg border grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mx-10 mt-4 p-4 font-light bg-white rounded-xl shadow-lg border grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <select
             name="type"
             className="border p-2 rounded-xl"

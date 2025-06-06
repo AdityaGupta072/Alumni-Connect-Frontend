@@ -4,7 +4,7 @@ import Alumni from '../assets/AlumniPage.png';
 
 const AlumniDashboard = () => {
   const navigate = useNavigate(); // ✅ Added
-
+  
   return (
     <>
       <section className='w-full flex h-screen'>
